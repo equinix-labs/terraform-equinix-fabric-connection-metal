@@ -1,13 +1,24 @@
-## terraform-equinix-template
+## terraform-metal-shared-connection
 
-<!-- TEMPLATE: Review all "TEMPLATE" comments and remove them when applied. -->
-<!-- TEMPLATE: replace "template" with the name of your project. The prefix "terraform-equinix-" informs the Terraform registry that this project is a Terraform module associated with the Equinix provider, Oreserve this prefix.  "terraform-metal-" may also be used for Equinix Metal modules, but "terraform-equinix-" will work too. -->
 [![Experimental](https://img.shields.io/badge/Stability-Experimental-red.svg)](https://github.com/equinix-labs/standards#about-uniform-standards)
 [![terraform](https://github.com/equinix-labs/terraform-equinix-template/actions/workflows/integration.yaml/badge.svg)](https://github.com/equinix-labs/terraform-equinix-template/actions/workflows/integration.yaml)
 
-`terraform-equinix-template` is a minimal Terraform module that utilizes [Terraform providers for Equinix](https://registry.terraform.io/namespaces/equinix) to provision digital infrastructure and demonstrate higher level integrations.
+`terraform-metal-shared-connection` is a minimal Terraform module that utilizes [Terraform providers for Equinix](https://registry.terraform.io/namespaces/equinix) to set up an Equinix Metal shared connection.
 
-<!-- TEMPLATE: Insert an image here of the infrastructure diagram. You can generate a starting image using instructions found at https://www.terraform.io/docs/cli/commands/graph.html#generating-images -->
+A part of Platform Equinix, your Equinix Metal™ infrastructure can connect with other parties, such as public cloud providers, network service providers, or your own colocation cages in Equinix by defining an [Equinix Fabric - software-defined interconnections](https://metal.equinix.com/developers/docs/equinix-interconnect/introduction/)
+
+Setting Up a Shared Port requires requesting the connection on the Equinix Metal side, retrieving a token and using that token to request a connection on the Equinix Fabric side. This module is intended to abstract you from this process and handle the connection as a single resource.
+
+```
+  Origin                                             Destination
+  (A-side)                                           (Z-side)
+
+┌────────────────┐                                 ┌───────────────┐
+│ Equinix Fabric │      Equinix Metal              │ Equinix Metal │
+│ Port / Network ├───── Shared connection  ───────►│ Shared Port   │
+│ Edge Device    │      (50 Mbps - 10 Gbps)        │               │
+└────────────────┘                                 └───────────────┘
+```
 
 ### Usage
 
@@ -34,14 +45,7 @@ terraform {
 }
 
 module "example" {
-  source = "github.com/equinix-labs/template"
-  # TEMPLATE: replace "template" with the name of the repo after the terraform-equinix- or terraform-metal- prefix.
-
-  # Published modules can be sourced as:
-  # source = "equinix-labs/template/equinix"
-  # See https://www.terraform.io/docs/registry/modules/publish.html for details.
-
-  # version = "0.1.0"
+  source = "github.com/equinix/terraform-metal-shared-connection"
 
   # TEMPLATE: insert required variables here
 }
@@ -49,13 +53,24 @@ module "example" {
 
 Run `terraform init -upgrade` and `terraform apply`.
 
-<!-- TEMPLATE: Expand this section with any additional information or requirements. -->
+
+#### Resources
+
+| Name | Type |
+| :-----: | :------: |
+| [metal_connection.this](https://registry.terraform.io/providers/equinix/metal/latest/docs/resources/device) | resource |
+| [equinix_ecx_l2_connection.this](https://registry.terraform.io/providers/equinix/equinix/latest/docs/resources/ecx_l2_connection) | resource |
+| [equinix_ecx_l2_sellerprofile.this](https://registry.terraform.io/providers/equinix/equinix/latest/docs/data-sources/ecx_l2_sellerprofile) | data source |
+| [equinix_ecx_port.primary](https://registry.terraform.io/providers/equinix/equinix/latest/docs/data-sources/ecx_port) | data source |
+| [equinix_ecx_port.secondary](https://registry.terraform.io/providers/equinix/equinix/latest/docs/data-sources/ecx_port) | data source |
 
 #### Variables
 
 |     Variable Name      |  Type   |        Default Value        | Description                                             |
 | :--------------------: | :-----: | :-------------------------: | :------------------------------------------------------ |
 |                        |         |                             |                                                         |
+
+TBD
 
 <!-- TEMPLATE: If published, remove the table and use the following: See <https://registry.terraform.io/modules/equinix-labs/template/equinix/latest?tab=inputs> for a description of all variables. -->
 
@@ -65,9 +80,10 @@ Run `terraform init -upgrade` and `terraform apply`.
 | :--------------------: | :-----: | :------------------------------------------------------ |
 |                        |         |                                                         |
 
+TBD
+
 <!-- TEMPLATE: If published, remove the table and use the following: See <https://registry.terraform.io/modules/equinix-labs/template/equinix/latest?tab=outputs> for a description of all outputs. -->
 
 ### Examples
 
-- [examples/simple](examples/simple/)
-
+- [examples/device-redundant-connection](examples/device-redundant-connection/)
