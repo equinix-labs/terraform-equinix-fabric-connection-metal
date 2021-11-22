@@ -45,7 +45,7 @@ terraform {
 }
 
 module "example" {
-  source = "github.com/equinix/terraform-metal-shared-connection"
+  source = "github.com/equinix-labs/terraform-metal-shared-connection"
 
   # TEMPLATE: insert required variables here
 }
