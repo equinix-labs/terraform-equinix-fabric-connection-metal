@@ -1,15 +1,29 @@
-# TEMPLATE: Consider the attributes users of this module will need to take advantage of this module
-# TEMPLATE: in a new module that depends on this module (addresses, credentials, filenames).
-# TEMPLATE: All outputs must have a description. Do not include descriptions or help text in the
-# TEMPLATE: value, use the description field.
-# TEMPLATE:
-# TEMPLATE: Declare all outputs in this file, sprawling declarations are difficult to identify.
-# TEMPLATE:
-# TEMPLATE: https://www.terraform.io/docs/language/values/outputs.html
-# TEMPLATE: https://www.terraform.io/docs/language/expressions/types.html
-#
-output "example" {
-  description = "The example output. In practice, do not produce output values that mirror variables, the user has this value already."
-  sensitive   = false
-  value       = var.example
+output "equinix_metal_connection_uuid" {
+  description = "Unique identifier of the connection resource on Equinix Metal side."
+  value       = metal_connection.this.id
+}
+
+output "equinix_metal_connection_status" {
+  description = "Status of the connection resource."
+  value       = metal_connection.this.status
+}
+
+output "equinix_metal_connection_ports" {
+  description = "List of connection ports - primary (ports[0]) and secondary (ports[1]). Schema of port is described in documentation of the metal_connection datasource."
+  value       = metal_connection.this.ports
+}
+
+output "equinix_fabric_connection_uuid" {
+  description = "Unique identifier of the connection resource on Equinix Fabric side."
+  value       = equinix_ecx_l2_connection.this.uuid
+}
+
+output "equinix_fabric_connection_status" {
+  description = "Connection provisioning status on Equinix Fabric side."
+  value       = equinix_ecx_l2_connection.this.status
+}
+
+output "equinix_fabric_secondary_connection_uuid" {
+  description = "Unique identifier of the redundant connection, applicable for HA connections."
+  value       = equinix_ecx_l2_connection.this.redundant_uuid
 }
