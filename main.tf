@@ -1,7 +1,12 @@
+
+data "metal_project" "this" {
+    name = var.metal_project_name
+}
+
 resource "metal_connection" "this" {
     name            = var.metal_connection_name
-    organization_id = var.metal_organization_id
-    project_id      = var.metal_project_id
+    organization_id = data.metal_project.this.organization_id
+    project_id      = data.metal_project.this.project_id
     metro           = var.metal_connection_metro
     redundancy      = var.metal_connection_redundancy
     type            = "shared"
@@ -23,8 +28,12 @@ data "equinix_ecx_port" "secondary" {
     name    = var.fabric_secondary_connection_port_name
 }
 
+locals {
+  fabric_connection_name = var.fabric_connection_name != null ? var.fabric_connection_name : var.metal_connection_name
+}
+
 resource "equinix_ecx_l2_connection" "this" {
-    name              = var.fabric_connection_name
+    name              = local.fabric_connection_name
     profile_uuid      = data.equinix_ecx_l2_sellerprofile.this.uuid
     speed             = var.fabric_connection_speed
     speed_unit        = var.fabric_connection_speed_unit
@@ -38,10 +47,10 @@ resource "equinix_ecx_l2_connection" "this" {
     dynamic "secondary_connection" {
         for_each = var.metal_connection_redundancy == "redundant" ? [1] : []
         content {
-            name        = "${var.fabric_connection_name}-sec"
+            name        = "${local.fabric_connection_name}-sec"
             port_uuid   = var.fabric_secondary_connection_port_name != null ? data.equinix_ecx_port.secondary[0].id : null 
             vlan_stag   = var.fabric_secondary_connection_port_name != null ? var.fabric_secondary_connection_vlan_id : null
-            device_uuid = var.fabric_secondary_connection_device_id
+            device_uuid = var.fabric_secondary_connection_device_id != null ? var.fabric_secondary_connection_device_id : var.fabric_connection_device_id
         }
     }
 }

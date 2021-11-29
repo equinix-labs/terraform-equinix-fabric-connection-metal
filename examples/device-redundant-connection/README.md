@@ -1,6 +1,6 @@
 ## Device Redundant Connection Example
 
-This example demonstrates usage of the Equinix terraform-metal-shared-connection module to create a redundant Equinix Fabric connection to interconnect your Equinix Metal resources in Silicon Valley to a single Network Edge device located in Dallas                               
+This example demonstrates usage of the Equinix terraform-metal-shared-connection module to create a redundant Equinix Fabric connection to interconnect your Equinix Metal resources in Silicon Valley to a single Network Edge device located in Dallas.
 
 ```
                                   ┌─────────────────┐
@@ -31,4 +31,3 @@ This example demonstrates usage of the Equinix terraform-metal-shared-connection
 terraform init
 terraform apply
 ```
-

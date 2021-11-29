@@ -1,16 +1,11 @@
-variable "metal_organization_id" {
+variable "metal_project_name" {
   type        = string
-  description = "ID of the organization responsible for the connection."
-}
-
-variable "metal_project_id" {
-  type        = string
-  description = "ID of the project where the connection is scoped to, must be set for shared connection."
+  description = "Name of the project where the connection is scoped to."
 }
 
 variable "metal_connection_name" {
   type        = string
-  description = "Name of the connection resource."
+  description = "Name of the connection resource that will be created."
 }
 
 variable "metal_connection_metro" {
@@ -25,6 +20,7 @@ variable "metal_connection_metro" {
 variable "metal_connection_redundancy" {
   type        = string
   description = "Connection redundancy - redundant or primary."
+  default     = "primary"
   validation {
     condition     = contains(["primary", "redundant"], var.metal_connection_redundancy)
     error_message = "Argument 'metal_connection_redundancy' must one of 'primary', or 'redundant'."
@@ -45,17 +41,20 @@ variable "metal_connection_tags" {
 
 variable "fabric_connection_name" {
   type        = string
-  description = "Connection name. An alpha-numeric 24 characters string which can include only hyphens and underscores."
+  description = "Name of the connection resource that will be created in Equinix Fabric side. If it is not defined, it will take the value in 'metal_connection_name' by default."
+  default     = null
 }
 
 variable "fabric_connection_speed" {
   type        = number
   description = "Speed/Bandwidth to be allocated to the connection - (MB or GB). "
+  default     = 50
 }
 
 variable "fabric_connection_speed_unit" {
   type        = string
   description = " Unit of the speed/bandwidth to be allocated to the connection."
+  default     = "MB"
 }
 
 variable "fabric_connection_notification_users" {
@@ -94,7 +93,7 @@ variable "fabric_connection_vlan_id" {
 
 variable "fabric_secondary_connection_device_id" {
   type        = string
-  description = "(Required when metal_connection_redundancy is 'redundant' and fabric_secondary_connection_port_name is not set) Unique identifier of the Network Edge virtual device from which the secondary connection would originate."
+  description = "(Required when metal_connection_redundancy is 'redundant' and fabric_secondary_connection_port_name is not set) Unique identifier of the Network Edge virtual device from which the secondary connection would originate. If it is not defined, it will take the value in 'fabric_connection_device_id' by default."
   default     = null
 }
 

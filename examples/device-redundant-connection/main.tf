@@ -25,19 +25,12 @@ module "connection" {
   source = "../../"
 
   # required variables
-  metal_organization_id                 = var.metal_organization_id
-  metal_project_id                      = var.metal_project_id
-  metal_connection_name                 = "example-metal-conn-side"
-  metal_connection_metro                = "SV"
-  metal_connection_redundancy           = "redundant"
-  fabric_connection_name                = "example-ef-conn-side"
-  fabric_connection_speed               = 50
-  fabric_connection_speed_unit          = "MB"
+  metal_project_name                    = var.metal_project_name
+  metal_connection_name                 = "example-connection"
+  metal_connection_metro                = "FR"
   fabric_connection_notification_users  = ["example@equinix.com"]
   
   # optional variables
-  metal_connection_description          = "Example description"
-  metal_connection_tags                 = ["terraformed"]
+  metal_connection_redundancy           = "redundant"
   fabric_connection_device_id           = var.fabric_device_id
-  fabric_secondary_connection_device_id = var.fabric_device_id
 }

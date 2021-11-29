@@ -58,6 +58,7 @@ Run `terraform init -upgrade` and `terraform apply`.
 
 | Name | Type |
 | :-----: | :------: |
+| [metal_project.this](https://registry.terraform.io/providers/equinix/metal/latest/docs/data-sources/project) | data source |
 | [metal_connection.this](https://registry.terraform.io/providers/equinix/metal/latest/docs/resources/device) | resource |
 | [equinix_ecx_l2_connection.this](https://registry.terraform.io/providers/equinix/equinix/latest/docs/resources/ecx_l2_connection) | resource |
 | [equinix_ecx_l2_sellerprofile.this](https://registry.terraform.io/providers/equinix/equinix/latest/docs/data-sources/ecx_l2_sellerprofile) | data source |
