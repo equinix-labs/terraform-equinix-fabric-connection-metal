@@ -1,29 +1,74 @@
+output "fabric_connection_primary_uuid" {
+  description = "Unique identifier of the connection."
+  value       = module.equinix-fabric-connection.primary_connection.uuid
+}
+
+output "fabric_connection_primary_name" {
+  description = "Name of the connection."
+  value       = module.equinix-fabric-connection.primary_connection.name
+}
+
+output "fabric_connection_primary_status" {
+  description = "Connection provisioning status."
+  value       = module.equinix-fabric-connection.primary_connection.status
+}
+
+output "fabric_connection_primary_provider_status" {
+  description = "Connection provisioning provider status."
+  value       = module.equinix-fabric-connection.primary_connection.provider_status
+}
+
+output "fabric_connection_primary_speed" {
+  description = "Connection speed."
+  value       = module.equinix-fabric-connection.primary_connection.speed
+}
+
+output "fabric_connection_primary_speed_unit" {
+  description = "Connection speed unit."
+  value       = module.equinix-fabric-connection.primary_connection.speed_unit
+}
+
+output "fabric_connection_primary_seller_metro" {
+  description = "Connection seller metro code."
+  value       = module.equinix-fabric-connection.primary_connection.seller_metro_code
+}
+
+output "fabric_connection_secondary_uuid" {
+  description = "Unique identifier of the secondary connection."
+  value       = module.equinix-fabric-connection.secondary_connection != null ? module.equinix-fabric-connection.secondary_connection.uuid : null
+}
+
+output "fabric_connection_secondary_name" {
+  description = "Name of the secondary connection."
+  value       = module.equinix-fabric-connection.secondary_connection != null ? module.equinix-fabric-connection.secondary_connection.name : null
+}
+
+output "fabric_connection_secondary_status" {
+  description = "Secondary connection provisioning status."
+  value       = module.equinix-fabric-connection.secondary_connection != null ? module.equinix-fabric-connection.secondary_connection.status : null
+}
+
+output "fabric_connection_secondary_provider_status" {
+  description = "Secondary connection provisioning provider status."
+  value       = module.equinix-fabric-connection.secondary_connection != null ? module.equinix-fabric-connection.secondary_connection.provider_status : null
+}
+
 output "equinix_metal_connection_uuid" {
   description = "Unique identifier of the connection resource on Equinix Metal side."
-  value       = metal_connection.this.id
+  value       = equinix_metal_connection.this.id
 }
 
 output "equinix_metal_connection_status" {
   description = "Status of the connection resource."
-  value       = metal_connection.this.status
+  value       = equinix_metal_connection.this.status
 }
 
 output "equinix_metal_connection_ports" {
-  description = "List of connection ports - primary (ports[0]) and secondary (ports[1]). Schema of port is described in documentation of the metal_connection datasource."
-  value       = metal_connection.this.ports
-}
-
-output "equinix_fabric_connection_uuid" {
-  description = "Unique identifier of the connection resource on Equinix Fabric side."
-  value       = equinix_ecx_l2_connection.this.uuid
-}
-
-output "equinix_fabric_connection_status" {
-  description = "Connection provisioning status on Equinix Fabric side."
-  value       = equinix_ecx_l2_connection.this.status
-}
-
-output "equinix_fabric_secondary_connection_uuid" {
-  description = "Unique identifier of the redundant connection, applicable for HA connections."
-  value       = equinix_ecx_l2_connection.this.redundant_uuid
+  description = <<EOF
+  List of connection ports - primary (ports[0]) and secondary (ports[1]). Schema of port is
+  described in documentation of the
+  [equinix_metal_connection](https://registry.terraform.io/providers/equinix/equinix/latest/docs/data-sources/equinix_metal_connection)
+  datasource.
+  EOF
+  value       = equinix_metal_connection.this.ports
 }

@@ -1,23 +1,24 @@
-## terraform-metal-shared-connection
+## Equinix Fabric L2 Connection To Equinix Metal Connection Terraform module
 
 [![Experimental](https://img.shields.io/badge/Stability-Experimental-red.svg)](https://github.com/equinix-labs/standards#about-uniform-standards)
 [![terraform](https://github.com/equinix-labs/terraform-equinix-template/actions/workflows/integration.yaml/badge.svg)](https://github.com/equinix-labs/terraform-equinix-template/actions/workflows/integration.yaml)
 
-`terraform-metal-shared-connection` is a minimal Terraform module that utilizes [Terraform providers for Equinix](https://registry.terraform.io/namespaces/equinix) to set up an Equinix Metal shared connection.
+`terraform-equinix-fabric-connection-metal` is a minimal Terraform module that utilizes [Terraform providers for Equinix](https://registry.terraform.io/namespaces/equinix) to set up an Equinix Metal shared connection.
 
 A part of Platform Equinix, your Equinix Metal™ infrastructure can connect with other parties, such as public cloud providers, network service providers, or your own colocation cages in Equinix by defining an [Equinix Fabric - software-defined interconnections](https://metal.equinix.com/developers/docs/equinix-interconnect/introduction/)
 
 Setting Up a Shared Port requires requesting the connection on the Equinix Metal side, retrieving a token and using that token to request a connection on the Equinix Fabric side. This module is intended to abstract you from this process and handle the connection as a single resource.
 
-```
+```html
   Origin                                             Destination
   (A-side)                                           (Z-side)
 
 ┌────────────────┐                                 ┌───────────────┐
 │ Equinix Fabric │      Equinix Metal              │ Equinix Metal │
 │ Port / Network ├───── Shared connection  ───────►│ Shared Port   │
-│ Edge Device    │      (50 Mbps - 10 Gbps)        │               │
-└────────────────┘                                 └───────────────┘
+│ Edge Device /  │     (50 Mbps - 10 Gbps)         └───────────────┘
+│ Service Token  │
+└────────────────┘
 ```
 
 ### Usage
@@ -33,58 +34,45 @@ This project may also be used as a [Terraform module](https://learn.hashicorp.co
 To use this module in a new project, create a file such as:
 
 ```hcl
-# main.tf
-terraform {
-  required_providers {
-    equinix = {
-      source = "equinix/equinix"
-    }
-    metal = {
-      source = "equinix/metal"
-    }
-}
+provider "equinix" {}
 
-module "example" {
-  source = "github.com/equinix-labs/terraform-metal-shared-connection"
+variable "metal_project_name" {}
+variable "edge_device_id" {}
 
-  # TEMPLATE: insert required variables here
+module "equinix-fabric-connection-metal" {
+  source = "github.com/equinix-labs/terraform-equinix-fabric-connection-metal"
+
+  # required variables
+  fabric_notification_users     = ["example@equinix.com"]
+  fabric_destination_metro_code = "SV"
+
+  metal_project_name = var.metal_project_name
+
+  # optional variables
+  network_edge_device_id = var.edge_device_id
 }
 ```
 
 Run `terraform init -upgrade` and `terraform apply`.
 
-
 #### Resources
 
 | Name | Type |
 | :-----: | :------: |
-| [metal_project.this](https://registry.terraform.io/providers/equinix/metal/latest/docs/data-sources/project) | data source |
-| [metal_connection.this](https://registry.terraform.io/providers/equinix/metal/latest/docs/resources/device) | resource |
-| [equinix_ecx_l2_connection.this](https://registry.terraform.io/providers/equinix/equinix/latest/docs/resources/ecx_l2_connection) | resource |
-| [equinix_ecx_l2_sellerprofile.this](https://registry.terraform.io/providers/equinix/equinix/latest/docs/data-sources/ecx_l2_sellerprofile) | data source |
-| [equinix_ecx_port.primary](https://registry.terraform.io/providers/equinix/equinix/latest/docs/data-sources/ecx_port) | data source |
-| [equinix_ecx_port.secondary](https://registry.terraform.io/providers/equinix/equinix/latest/docs/data-sources/ecx_port) | data source |
+| [equinix_metal_project.this](https://registry.terraform.io/providers/equinix/metal/latest/docs/data-sources/project) | data source |
+| [equinix_metal_connection.this](https://registry.terraform.io/providers/equinix/metal/latest/docs/resources/device) | resource |
+| [equinix-fabric-connection](https://registry.terraform.io/modules/equinix-labs/fabric-connection/equinix/latest) | module |
 
 #### Variables
 
-|     Variable Name      |  Type   |        Default Value        | Description                                             |
-| :--------------------: | :-----: | :-------------------------: | :------------------------------------------------------ |
-|                        |         |                             |                                                         |
-
-TBD
-
-<!-- TEMPLATE: If published, remove the table and use the following: See <https://registry.terraform.io/modules/equinix-labs/template/equinix/latest?tab=inputs> for a description of all variables. -->
+See <https://registry.terraform.io/modules/equinix-labs/fabric-connection-metal/equinix/latest?tab=inputs> for a description of all variables.
 
 #### Outputs
 
-|     Variable Name      |  Type   | Description                                             |
-| :--------------------: | :-----: | :------------------------------------------------------ |
-|                        |         |                                                         |
-
-TBD
-
-<!-- TEMPLATE: If published, remove the table and use the following: See <https://registry.terraform.io/modules/equinix-labs/template/equinix/latest?tab=outputs> for a description of all outputs. -->
+See <https://registry.terraform.io/modules/equinix-labs/fabric-connection-metal/equinix/latest?tab=outputs> for a description of all outputs.
 
 ### Examples
 
-- [examples/device-redundant-connection](examples/device-redundant-connection/)
+- [Fabric Port redundant connection](https://registry.terraform.io/modules/equinix-labs/fabric-connection-metal/equinix/latest/examples/fabric-port-redundant-connection/)
+- [Network Edge device redundant connection](https://registry.terraform.io/modules/equinix-labs/fabric-connection-metal/equinix/latest/examples/network-edge-device-redundant-connection/)
+- [Fabric a-side Service Token redundant connection](https://registry.terraform.io/modules/equinix-labs/fabric-connection-metal/equinix/latest/examples/service-token-redundant-connection)

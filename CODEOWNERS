@@ -1,1 +1,3 @@
-* @equinix-labs/terraform-metal-shared-connection ocobleseqx
+# TEMPLATE: add your username after terraform
+# TEMPLATE: * equinix-labs/terraform myusername
+* @ocobleseqx
