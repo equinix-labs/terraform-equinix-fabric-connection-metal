@@ -40,7 +40,7 @@ variable "metal_project_name" {}
 variable "edge_device_id" {}
 
 module "equinix-fabric-connection-metal" {
-  source = "github.com/equinix-labs/terraform-equinix-fabric-connection-metal"
+  source = "equinix-labs/fabric-connection-metal/equinix"
 
   # required variables
   fabric_notification_users     = ["example@equinix.com"]

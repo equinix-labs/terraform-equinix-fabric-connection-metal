@@ -1,3 +1,9 @@
+## 0.1.1 (April 19, 2022)
+
+NOTES:
+
+Modules in the examples folder now point to the registry path instead of the github repository.
+
 ## 0.1.0 (April 18, 2022)
 
 NOTES:

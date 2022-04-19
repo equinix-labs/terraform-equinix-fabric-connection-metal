@@ -4,8 +4,8 @@
 provider "equinix" {}
 
 module "equinix-fabric-connection-metal" {
-  source = "github.com/equinix-labs/terraform-equinix-fabric-connection-metal"
-  
+  source = "equinix-labs/fabric-connection-metal/equinix"
+
   # required variables
   fabric_notification_users     = ["example@equinix.com"]
   fabric_destination_metro_code = "SV" // corresponds to Silicon Valley
