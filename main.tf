@@ -39,7 +39,7 @@ module "equinix-fabric-connection" {
   vlan_stag                 = var.fabric_vlan_stag
   service_token_id          = var.fabric_service_token_id
   speed                     = var.fabric_speed
-  purchase_order_number     = var.fabric_purchase_order_number
+  purcharse_order_number    = var.fabric_purcharse_order_number
 
   seller_profile_name      = var.redundancy_type == "SINGLE" ? "Equinix Metal - Layer 2" : "Equinix Metal - Layer 2 - Redundant"
   seller_metro_code        = var.fabric_destination_metro_code
