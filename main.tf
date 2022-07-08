@@ -20,7 +20,7 @@ resource "equinix_metal_connection" "this" {
   type            = "shared"
   description     = var.metal_connection_description
   tags            = var.metal_connection_tags
-  speed           = var.fabric_speed + "Mbps"
+  speed           = format("%dMbps", var.fabric_speed)
   vlans           = var.metal_connection_vlans
 }
 
