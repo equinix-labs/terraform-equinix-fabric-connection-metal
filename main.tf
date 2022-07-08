@@ -20,6 +20,8 @@ resource "equinix_metal_connection" "this" {
   type            = "shared"
   description     = var.metal_connection_description
   tags            = var.metal_connection_tags
+  speed           = var.fabric_speed + "Mbps"
+  vlans           = var.metal_connection_vlans
 }
 
 module "equinix-fabric-connection" {

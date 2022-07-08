@@ -171,3 +171,8 @@ variable "metal_connection_tags" {
   description = "String list of tags for the connection resource."
   default     = ["terraform"]
 }
+
+variable "metal_connection_vlans" {
+  type        = list(number)
+  description = "Pass one vlan for Primary/Single connection and two vlans for Redundant connection."
+}
