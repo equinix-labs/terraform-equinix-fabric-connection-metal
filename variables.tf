@@ -175,5 +175,9 @@ variable "metal_connection_tags" {
 variable "metal_connection_vlans" {
   type        = list(number)
   description = "Pass one vlan for Primary/Single connection and two vlans for Redundant connection."
-  default     = null
+  default     = []
+  validation {
+    condition     = length(var.metal_connection_vlans) <= 2
+    error_message = "Max. number of vlans is two (one per connection, primary and secondary)"
+  }
 }
