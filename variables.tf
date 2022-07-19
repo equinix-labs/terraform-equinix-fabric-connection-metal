@@ -19,7 +19,7 @@ variable "fabric_destination_metro_code" {
   description = "Destination Metro code where the connection will be created."
 
   validation {
-    condition =can(regex("^[A-Z]{2}$", var.fabric_destination_metro_code))
+    condition     = can(regex("^[A-Z]{2}$", var.fabric_destination_metro_code))
     error_message = "Valid metro code consits of two capital leters, i.e. 'FR', 'SV', 'DC'."
   }
 }
@@ -72,11 +72,11 @@ variable "fabric_speed" {
   Speed/Bandwidth in Mbps to be allocated to the connection. If unspecified, it will be used the minimum
   bandwidth available for the `Equinix Metal` service profile.
   EOF
-  default = 50
+  default     = 50
   validation {
-    condition = contains([50, 100, 200, 500, 1000, 2000, 5000, 10000], var.fabric_speed)
+    condition     = contains([50, 100, 200, 500, 1000, 2000, 5000, 10000], var.fabric_speed)
     error_message = "Valid values are (50, 100, 200, 500, 1000, 2000, 5000, 10000)."
-  } 
+  }
 }
 
 variable "fabric_purcharse_order_number" {
@@ -146,7 +146,7 @@ variable "redundancy_type" {
   validation {
     condition     = contains(["SINGLE", "REDUNDANT"], var.redundancy_type)
     error_message = "Valid values for 'redundancy_type' are (SINGLE, REDUNDANT)."
-  } 
+  }
 }
 
 variable "metal_project_name" {
@@ -170,4 +170,14 @@ variable "metal_connection_tags" {
   type        = list(string)
   description = "String list of tags for the connection resource."
   default     = ["terraform"]
+}
+
+variable "metal_connection_vlans" {
+  type        = list(number)
+  description = "Pass one vlan for Primary/Single connection and two vlans for Redundant connection."
+  default     = []
+  validation {
+    condition     = length(var.metal_connection_vlans) <= 2
+    error_message = "Max. number of vlans is two (one per connection, primary and secondary)"
+  }
 }

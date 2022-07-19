@@ -12,18 +12,20 @@ resource "random_string" "this" {
 }
 
 resource "equinix_metal_connection" "this" {
-    name            = local.metal_connection_name
-    organization_id = data.equinix_metal_project.this.organization_id
-    project_id      = data.equinix_metal_project.this.project_id
-    metro           = var.fabric_destination_metro_code
-    redundancy      = var.redundancy_type == "SINGLE" ? "primary" : "redundant"
-    type            = "shared"
-    description     = var.metal_connection_description
-    tags            = var.metal_connection_tags
+  name            = local.metal_connection_name
+  organization_id = data.equinix_metal_project.this.organization_id
+  project_id      = data.equinix_metal_project.this.project_id
+  metro           = var.fabric_destination_metro_code
+  redundancy      = var.redundancy_type == "SINGLE" ? "primary" : "redundant"
+  type            = "shared"
+  description     = var.metal_connection_description
+  tags            = var.metal_connection_tags
+  speed           = format("%dMbps", var.fabric_speed)
+  vlans           = var.metal_connection_vlans
 }
 
 module "equinix-fabric-connection" {
-  source = "equinix-labs/fabric-connection/equinix"
+  source  = "equinix-labs/fabric-connection/equinix"
   version = "0.1.1"
 
   # required variables
