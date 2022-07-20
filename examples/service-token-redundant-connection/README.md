@@ -5,6 +5,8 @@ This example demonstrates usage of the Equinix Connection Metal to establish a r
 - Create a Metal shared redundant connection in Dallas.
 - Create Equinix Fabric l2 connection in Dallas for 'Equinix Metal - Layer 2 - Redundant' service profile with 100Mbps bandwidth.
 
+After apply the connection status will remain in pending approval. This process can take up to 24 hours.
+
 ## Usage
 
 To provision this example, you should clone the github repository and run terraform from within this directory:

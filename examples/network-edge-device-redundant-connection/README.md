@@ -2,8 +2,10 @@
 
 This example demonstrates usage of the Equinix Connection Metal module to establish a redundant Equinix Fabric L2 Connection from two Equinix Network Edge devices to Equinix Metal. It will:
 
-- Create a Metal shared redundant connection in Dallas.
-- Create Equinix Fabric l2 connection in Dallas for 'Equinix Metal - Layer 2 - Redundant' service profile with 50Mbps bandwidth (default if not specified).
+- Request an Equinix Metal shared redundant connection in Dallas.
+- Request an Equinix Fabric l2 connection in Dallas for 'Equinix Metal - Layer 2 - Redundant' service profile with 50Mbps bandwidth (default if not specified).
+
+After apply the connection status will remain in pending approval. This process can take up to 24 hours.
 
 ```html
                                   ┌─────────────────┐

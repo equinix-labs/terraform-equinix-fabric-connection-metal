@@ -2,8 +2,10 @@
 
 This example demonstrates usage of the Equinix Connection Metal module to establish a single Equinix Fabric L2 Connection from an Equinix Fabric Port to Equinix Metal. It will:
 
-- Create a Metal shared non-redundant connection in Frankfurt.
-- Create Equinix Fabric l2 connection in Frankfurt for 'Equinix Metal - Layer 2' service profile with 200Mbps bandwidth.
+- Request an Equinix Metal shared non-redundant connection in Frankfurt.
+- Request an Equinix Fabric l2 connection in Frankfurt for 'Equinix Metal - Layer 2' service profile with 200Mbps bandwidth.
+
+After apply the connection status will remain in pending approval. This process can take up to 24 hours.
 
 ## Usage
 

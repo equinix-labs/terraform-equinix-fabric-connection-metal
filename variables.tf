@@ -79,7 +79,7 @@ variable "fabric_speed" {
   }
 }
 
-variable "fabric_purcharse_order_number" {
+variable "fabric_purchase_order_number" {
   type        = string
   description = "Connection's purchase order number to reflect on the invoice."
   default     = ""
@@ -151,7 +151,20 @@ variable "redundancy_type" {
 
 variable "metal_project_name" {
   type        = string
-  description = "Name of the project where the connection is scoped to."
+  description = <<EOF
+  Name of the project where the connection is scoped to, used to look up the project. One one of 'metal_project_name'
+  or 'metal_project_id' is required.
+  EOF
+  default     = ""
+}
+
+variable "metal_project_id" {
+  type        = string
+  description = <<EOF
+  ID of the project where the connection is scoped to, used to look up the project. One of 'metal_project_id' or
+  'metal_project_name' is required.
+  EOF
+  default     = ""
 }
 
 variable "metal_connection_name" {
@@ -180,4 +193,15 @@ variable "metal_connection_vlans" {
     condition     = length(var.metal_connection_vlans) <= 2
     error_message = "Max. number of vlans is two (one per connection, primary and secondary)"
   }
+}
+
+variable "service_token_automation_feature_preview" {
+  type        = bool
+  description = <<EOF
+  If true it will use automated service token type z_side. NOTE: Equinix Metal connection with service_token_type
+  z_side/a_side is not generally available and may not be enabled yet for your organization. This new feature will
+  provision the connection automatically after creation, but it is not compatible (July, 2022) with
+  'fabric_service_token_id' or 'network_edge_device_id'.
+  EOF
+  default     = false
 }
