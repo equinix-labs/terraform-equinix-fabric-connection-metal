@@ -1,3 +1,9 @@
+## 0.2.0 (July 20, 2022)
+
+FEATURES:
+
+- Added input variable `service_token_automation_feature_preview` to support feature preview for automated service token type `z_side`
+
 ## 0.1.1 (April 19, 2022)
 
 NOTES:

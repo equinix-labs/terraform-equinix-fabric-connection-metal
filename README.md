@@ -73,6 +73,7 @@ See <https://registry.terraform.io/modules/equinix-labs/fabric-connection-metal/
 
 ### Examples
 
-- [Fabric Port redundant connection](https://registry.terraform.io/modules/equinix-labs/fabric-connection-metal/equinix/latest/examples/fabric-port-redundant-connection/)
+- [Fabric Port connection](https://registry.terraform.io/modules/equinix-labs/fabric-connection-metal/equinix/latest/examples/fabric-port-connection/)
+- [Fabric Port connection wiht Metal z-side service token](https://registry.terraform.io/modules/equinix-labs/fabric-connection-metal/equinix/latest/examples/fabric-port-connection-with-zside-token/)
 - [Network Edge device redundant connection](https://registry.terraform.io/modules/equinix-labs/fabric-connection-metal/equinix/latest/examples/network-edge-device-redundant-connection/)
 - [Fabric a-side Service Token redundant connection](https://registry.terraform.io/modules/equinix-labs/fabric-connection-metal/equinix/latest/examples/service-token-redundant-connection)
