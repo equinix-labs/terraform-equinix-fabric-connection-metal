@@ -3,7 +3,16 @@
 FEATURES:
 
 - Added input variable `service_token_automation_feature_preview` to support feature preview for automated service token type `z_side`
+- Added `speed` and `vlans` parameters to the `equinix_metal_connection` resource [#4](https://github.com/equinix-labs/terraform-equinix-fabric-connection-metal/pull/4)
 
+BUG FIXES:
+
+- typo `purchase_order` was `purcharse_order` 
+
+NEW CONTRIBUTORS:
+
+- @cprivitere made their first contribution in https://github.com/equinix-labs/terraform-equinix-fabric-connection-metal/pull/4
+  
 ## 0.1.1 (April 19, 2022)
 
 NOTES:
