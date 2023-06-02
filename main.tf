@@ -4,7 +4,7 @@ locals {
 }
 
 data "equinix_metal_project" "this" {
-  name = var.metal_project_name == "" || var.metal_project_id != "" ? null : var.metal_project_name
+  name       = var.metal_project_name == "" || var.metal_project_id != "" ? null : var.metal_project_name
   project_id = var.metal_project_id == "" ? null : var.metal_project_id
 }
 
@@ -59,7 +59,7 @@ module "equinix-fabric-connection" {
 }
 
 module "equinix-fabric-connection-sec" {
-  count = var.service_token_automation_feature_preview && var.redundancy_type == "REDUNDANT" ? 1: 0
+  count   = var.service_token_automation_feature_preview && var.redundancy_type == "REDUNDANT" ? 1 : 0
   source  = "equinix-labs/fabric-connection/equinix"
   version = "0.3.1"
 
@@ -67,12 +67,12 @@ module "equinix-fabric-connection-sec" {
   notification_users = var.fabric_notification_users
 
   # optional variables
-  name                      = var.fabric_secondary_connection_name != "" ? var.fabric_secondary_connection_name : format("%s-SEC", local.fabric_primary_name)
-  port_name                 = var.fabric_secondary_port_name != "" ? var.fabric_secondary_port_name : var.fabric_port_name
-  vlan_stag                 = var.fabric_secondary_vlan_stag
-  speed                     = var.fabric_speed
-  speed_unit                = "MB"
-  purchase_order_number     = var.fabric_purchase_order_number
+  name                  = var.fabric_secondary_connection_name != "" ? var.fabric_secondary_connection_name : format("%s-SEC", local.fabric_primary_name)
+  port_name             = var.fabric_secondary_port_name != "" ? var.fabric_secondary_port_name : var.fabric_port_name
+  vlan_stag             = var.fabric_secondary_vlan_stag
+  speed                 = var.fabric_speed
+  speed_unit            = "MB"
+  purchase_order_number = var.fabric_purchase_order_number
 
   zside_service_token_id = equinix_metal_connection.this.service_tokens.1.id
 
