@@ -13,7 +13,7 @@ To provision this example, you should clone the github repository and run terraf
 
 ```bash
 git clone https://github.com/equinix-labs/terraform-equinix-fabric-connection-metal.git
-cd terraform-equinix-fabric-connection-metal/examples/network-edge-device-redundant-connection
+cd terraform-equinix-fabric-connection-metal/examples/fabric-port-connection
 terraform init
 terraform apply
 ```
@@ -22,8 +22,8 @@ Note that this example may create resources which cost money. Run 'terraform des
 
 ## Variables
 
-See <https://registry.terraform.io/modules/equinix-labs/fabric-connection-metal/equinix/latest/examples/network-edge-device-redundant-connection?tab=inputs> for a description of all variables.
+See <https://registry.terraform.io/modules/equinix-labs/fabric-connection-metal/equinix/latest/examples/fabric-port-connection?tab=inputs> for a description of all variables.
 
 ## Outputs
 
-See <https://registry.terraform.io/modules/equinix-labs/fabric-connection-metal/equinix/latest/examples/network-edge-device-redundant-connection?tab=outputs> for a description of all outputs.
+See <https://registry.terraform.io/modules/equinix-labs/fabric-connection-metal/equinix/latest/examples/fabric-port-connection?tab=outputs> for a description of all outputs.
