@@ -61,7 +61,7 @@ module "equinix-fabric-connection" {
 module "equinix-fabric-connection-sec" {
   count   = var.service_token_automation_feature_preview && var.redundancy_type == "REDUNDANT" ? 1 : 0
   source  = "equinix-labs/fabric-connection/equinix"
-  version = "0.3.1"
+  version = "0.4.0"
 
   # required variables
   notification_users = var.fabric_notification_users
