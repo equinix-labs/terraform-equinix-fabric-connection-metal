@@ -9,8 +9,7 @@ module "equinix-fabric-connection-metal" {
   # required variables
   fabric_notification_users     = ["example@equinix.com"]
   fabric_destination_metro_code = "DA" // corresponds to Dallas
-
-  metal_project_name = var.metal_project_name
+  metal_project_name            = var.metal_project_name
 
   # optional variables
   redundancy_type                  = "REDUNDANT"

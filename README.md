@@ -7,17 +7,17 @@
 
 A part of Platform Equinix, your Equinix Metal™ infrastructure can connect with other parties, such as public cloud providers, network service providers, or your own colocation cages in Equinix by defining an [Equinix Fabric - software-defined interconnections](https://metal.equinix.com/developers/docs/equinix-interconnect/introduction/)
 
-Setting Up a Shared Port requires requesting the connection on the Equinix Metal side, retrieving a token and using that token to request a connection on the Equinix Fabric side. This module is intended to abstract you from this process and handle the connection as a single resource.
+Setting Up a [Fabric Billed Fabric Virtual Connections](https://deploy.equinix.com/developers/docs/metal/interconnections/fabric-billed-fabric-vc/) requires requesting the connection on the Equinix Metal side, retrieving a token and using that token to request a connection on the Equinix Fabric side. This module is intended to abstract you from this process and handle the connection as a single resource.
 
 ```html
-  Origin                                             Destination
+  Origin                                            Destination
   (A-side)                                           (Z-side)
 
-┌────────────────┐                                 ┌───────────────┐
-│ Equinix Fabric │      Equinix Metal              │ Equinix Metal │
-│ Port / Network ├───── Shared connection  ───────►│ Shared Port   │
-│ Edge Device /  │     (50 Mbps - 10 Gbps)         └───────────────┘
-│ Service Token  │
+┌────────────────┐                               ┌───────────────┐
+│ Equinix Fabric │       Equinix Metal           │ Equinix Metal │
+│ Port / Network ├─────  Fabric Billed   ───────►│     Port      │
+│ Edge Device /  │     Virtual Connection        └───────────────┘
+│ Service Token  │     (50 Mbps - 10 Gbps)
 └────────────────┘
 ```
 
@@ -74,6 +74,5 @@ See <https://registry.terraform.io/modules/equinix-labs/fabric-connection-metal/
 ### Examples
 
 - [Fabric Port connection](https://registry.terraform.io/modules/equinix-labs/fabric-connection-metal/equinix/latest/examples/fabric-port-connection/)
-- [Fabric Port connection wiht Metal z-side service token](https://registry.terraform.io/modules/equinix-labs/fabric-connection-metal/equinix/latest/examples/fabric-port-connection-with-zside-token/)
 - [Network Edge device redundant connection](https://registry.terraform.io/modules/equinix-labs/fabric-connection-metal/equinix/latest/examples/network-edge-device-redundant-connection/)
 - [Fabric a-side Service Token redundant connection](https://registry.terraform.io/modules/equinix-labs/fabric-connection-metal/equinix/latest/examples/service-token-redundant-connection)

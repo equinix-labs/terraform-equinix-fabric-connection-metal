@@ -16,7 +16,7 @@ variable "fabric_connection_name" {
 
 variable "fabric_destination_metro_code" {
   type        = string
-  description = "Destination Metro code where the connection will be created."
+  description = "Destination Metal Metro code where the connection will be created."
 
   validation {
     condition     = can(regex("^[A-Z]{2}$", var.fabric_destination_metro_code))
@@ -76,6 +76,18 @@ variable "fabric_speed" {
   validation {
     condition     = contains([50, 100, 200, 500, 1000, 2000, 5000, 10000], var.fabric_speed)
     error_message = "Valid values are (50, 100, 200, 500, 1000, 2000, 5000, 10000)."
+  }
+}
+
+variable "fabric_secondary_speed" {
+  type        = number
+  description = <<EOF
+  Speed/Bandwidth in Mbps to be allocated to the connection. If unspecified, it will be used the primary connection fabric speed.
+  EOF
+  default     = 0
+  validation {
+    condition     = contains([0, 50, 100, 200, 500, 1000, 2000, 5000, 10000], var.fabric_secondary_speed)
+    error_message = "Valid values are (0, 50, 100, 200, 500, 1000, 2000, 5000, 10000)."
   }
 }
 
@@ -193,15 +205,4 @@ variable "metal_connection_vlans" {
     condition     = length(var.metal_connection_vlans) <= 2
     error_message = "Max. number of vlans is two (one per connection, primary and secondary)"
   }
-}
-
-variable "service_token_automation_feature_preview" {
-  type        = bool
-  description = <<EOF
-  If true it will use automated service token type z_side. NOTE: Equinix Metal connection with service_token_type
-  z_side/a_side is not generally available and may not be enabled yet for your organization. This new feature will
-  provision the connection automatically after creation, but it is not compatible (July, 2022) with
-  'fabric_service_token_id' or 'network_edge_device_id'.
-  EOF
-  default     = false
 }
